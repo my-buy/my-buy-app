@@ -2,7 +2,24 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+var axios = require('axios')
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+  onLoadDataClick() {
+    axios.get('http://localhost:3030/products?$sort[price]=-1')
+  .then((response) => {
+    response.data.data.forEach((item) => {
+      console.log(item)
+      console.log(item.name + item.price)
+    })
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  }
   render() {
     return (
       <div className="App">
@@ -10,10 +27,8 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <button onClick={this.onLoadDataClick.bind(this)}>load data</button>
+       </div>
     );
   }
 }
