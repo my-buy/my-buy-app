@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
 var axios = require('axios')
@@ -6,27 +6,94 @@ var axios = require('axios')
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inventory: '',
+      name: '',
+      model: '',
+      price: '',
+      image: '',
+      description: '',
+      url: ''
+    };
   }
-  onLoadDataClick() {
-    axios.get('http://localhost:3030/products?$sort[price]=-1')
-  .then((response) => {
-    response.data.data.forEach((item) => {
-      console.log(item)
-      console.log(item.name + item.price)
+  componentWillMount() {
+    let inventory;
+    axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
+      inventory = response.data.data
+      this.setState({inventory})
     })
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+  }
+  onDeleteClick(id, e) {
+    let inventory;
+    axios.delete('http://localhost:3030/products/' + id).then((deleted) => {
+      axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
+        inventory = response.data.data
+        this.setState({inventory})
+      })
+    })
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    let inventory
+    let newItem = {
+      name: this.state.name,
+      type: 'typeGoesHere',
+      model: this.state.model,
+      price: parseInt(this.state.price),
+      upc: 'upcGoesHere',
+      image: this.state.image,
+      description: this.state.description,
+      url: this.state.url
+    };
+    axios.post('http://localhost:3030/products', newItem).then((added) => {
+      axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
+        inventory = response.data.data
+        this.setState({inventory})
+      })
+    })
+  }
+  whenChanged(field, e) {
+    var change = {};
+    change[field] = e.target.value;
+    this.setState(change);
   }
   render() {
+    if (this.state.inventory.length === 0) {
+      return false
+    }
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Welcome to React</h2>
+          <h2>My Buy</h2>
+          <a href='#addProduct'>Add a Product</a>
         </div>
-        <button onClick={this.onLoadDataClick.bind(this)}>load data</button>
-       </div>
+        <ul>
+          {this.state.inventory.map((item) => {
+            return (
+              <li className={item.id} key={item.id}>
+                <p className='name'>{item.name}</p>
+                <p className='model'>{item.model}</p>
+                <p className='price'>{'$' + Math.round(item.price)}</p>
+                <img role='presentation' src={item.image}/>
+                <p className='description'>{item.description}</p>
+                <a href={item.url}>Item Details</a>
+                <i onClick={this.onDeleteClick.bind(this, item.id)} className="fa fa-trash-o"></i>
+              </li>
+            )
+          })}
+        </ul>
+        <a name='addProduct'></a>
+        <h1>Add a Product</h1>
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <input onChange={this.whenChanged.bind(this, 'name')} type='text' value={this.state.name} placeholder='product name'/>
+          <input onChange={this.whenChanged.bind(this, 'model')} type='text' value={this.state.model} placeholder='model'/>
+          <input onChange={this.whenChanged.bind(this, 'price')} type='number' min="10000" value={this.state.price} placeholder='price'/>
+          <input onChange={this.whenChanged.bind(this, 'image')} type='text' value={this.state.image} placeholder='image url'/>
+          <input onChange={this.whenChanged.bind(this, 'description')} type='text' value={this.state.description} placeholder='description'/>
+          <input onChange={this.whenChanged.bind(this, 'url')} type='text' value={this.state.url} placeholder='product url'/>
+          <button>Add Product</button>
+        </form>
+      </div>
     );
   }
 }
