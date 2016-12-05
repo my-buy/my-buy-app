@@ -16,7 +16,7 @@ class App extends Component {
       url: ''
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     let inventory;
     axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
       inventory = response.data.data
@@ -39,7 +39,7 @@ class App extends Component {
       name: this.state.name,
       type: 'typeGoesHere',
       model: this.state.model,
-      price: parseInt(this.state.price),
+      price: parseInt(this.state.price, 10),
       upc: 'upcGoesHere',
       image: this.state.image,
       description: this.state.description,
