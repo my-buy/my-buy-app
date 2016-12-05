@@ -71,10 +71,10 @@ class App extends Component {
           {this.state.inventory.map((item) => {
             return (
               <li className={item.id} key={item.id}>
+                <img role='presentation' src={item.image}/>
                 <p className='name'>{item.name}</p>
                 <p className='model'>{item.model}</p>
                 <p className='price'>{'$' + Math.round(item.price)}</p>
-                <img role='presentation' src={item.image}/>
                 <p className='description'>{item.description}</p>
                 <a href={item.url}>Item Details</a>
                 <i onClick={this.onDeleteClick.bind(this, item.id)} className="fa fa-trash-o"></i>
