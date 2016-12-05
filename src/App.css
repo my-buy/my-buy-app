@@ -1,6 +1,8 @@
-html, body {
-  padding: 0;
+html,
+body {
+  font-family: Arial;
   margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -13,15 +15,35 @@ html, body {
 }
 
 .App-header {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #053c63;
-  height: 50px;
-  padding: 20px;
+  background-color: #053C63;
   color: white;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  padding: 20px;
 }
-
+.App-header a {
+  color: white;
+  text-decoration: underline;
+}
 .App-intro {
   font-size: large;
+}
+ul {
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+  margin: 10px 0;
+}
+
+img {
+  border: 2px solid #053C63;
+  height: 200px;
+  width: 200px;
+}
+.name {
+  font-weight: bolder;
 }
