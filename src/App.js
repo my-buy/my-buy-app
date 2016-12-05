@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import logo from './bestbuy.png'
 
 var axios = require('axios')
 
@@ -64,6 +65,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
+          <img src={logo} />
           <h2>My Buy</h2>
           <a href='#addProduct'>Add a Product</a>
         </div>
@@ -71,13 +73,17 @@ class App extends Component {
           {this.state.inventory.map((item) => {
             return (
               <li className={item.id} key={item.id}>
-                <img role='presentation' src={item.image}/>
-                <p className='name'>{item.name}</p>
-                <p className='model'>{item.model}</p>
-                <p className='price'>{'$' + Math.round(item.price)}</p>
-                <p className='description'>{item.description}</p>
-                <a href={item.url}>Item Details</a>
-                <i onClick={this.onDeleteClick.bind(this, item.id)} className="fa fa-trash-o"></i>
+                <div className="productImage">
+                  <img role='presentation' src={item.image}/>
+                </div>
+                <div className="productInfo">
+                  <p className='name'>{item.name}</p>
+                  <p className='model'>{'Model: ' + item.model}</p>
+                  <p className='price'>{'Price: ' +'$' + Math.round(item.price)}</p>
+                  <p className='description'>{item.description}</p>
+                  <a href={item.url}>Item Details</a>
+                </div>
+                <i onClick={this.onDeleteClick.bind(this, item.id)} style={{fontSize: '30px'}} className="fa fa-trash-o"></i>
               </li>
             )
           })}
