@@ -14,12 +14,17 @@ class App extends Component {
       price: '',
       image: '',
       description: '',
-      url: ''
+      url: '',
+      searchField: '',
+      lastGET: 'http://localhost:3030/products?&$limit=20&$sort[price]=-1'
     };
   }
   componentDidMount() {
+    this.getInitialData()
+  }
+  getInitialData() {
     let inventory;
-    axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
+    axios.get(this.state.lastGET).then((response) => {
       inventory = response.data.data
       this.setState({inventory})
     })
@@ -27,7 +32,7 @@ class App extends Component {
   onDeleteClick(id, e) {
     let inventory;
     axios.delete('http://localhost:3030/products/' + id).then((deleted) => {
-      axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
+      axios.get(this.state.lastGET).then((response) => {
         inventory = response.data.data
         this.setState({inventory})
       })
@@ -35,28 +40,54 @@ class App extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    let inventory
-    let newItem = {
-      name: this.state.name,
-      type: 'typeGoesHere',
-      model: this.state.model,
-      price: parseInt(this.state.price, 10),
-      upc: 'upcGoesHere',
-      image: this.state.image,
-      description: this.state.description,
-      url: this.state.url
-    };
-    axios.post('http://localhost:3030/products', newItem).then((added) => {
-      axios.get('http://localhost:3030/products?$sort[price]=-1').then((response) => {
-        inventory = response.data.data
-        this.setState({inventory})
+    if (this.state.image.indexOf('http') === -1) {
+      alert('image must be a URL')
+    } else {
+      let newItem = {
+        name: this.state.name,
+        type: 'typeGoesHere',
+        model: this.state.model,
+        price: parseInt(this.state.price, 10),
+        upc: 'upcGoesHere',
+        image: this.state.image,
+        description: this.state.description,
+        url: this.state.url
+      }
+      axios.post('http://localhost:3030/products', newItem).then((added) => {
+        this.getInitialData();
       })
-    })
+      this.setState({
+        name: '',
+        model: '',
+        price: '',
+        image: '',
+        description: '',
+        url: ''
+      })
+    }
   }
   whenChanged(field, e) {
     var change = {};
     change[field] = e.target.value;
     this.setState(change);
+  }
+  onSearchSubmit(e) {
+    e.preventDefault();
+    let searchTerm = this.state.searchField;
+    let inventory;
+    axios.get('http://localhost:3030/products?name[$like]=*' + searchTerm + '*&$sort[price]=-1').then((response) => {
+      if (response.data.data.length !== 0) {
+        inventory = response.data.data
+        this.setState({
+          inventory,
+          lastGET: 'http://localhost:3030/products?name[$like]=*' + searchTerm + '*&$limit=20&$sort[price]=-1'
+        })
+      } else {
+        alert('product not found');
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
   }
   render() {
     if (this.state.inventory.length === 0) {
@@ -65,9 +96,17 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} />
+          <img src={logo}/>
           <h2>My Buy</h2>
           <a href='#addProduct'>Add a Product</a>
+        </div>
+        <div className='search'>
+          <form onSubmit={this.onSearchSubmit.bind(this)} className='searchForm'>
+            <div className='iconWrapper'>
+              <i onClick={this.onSearchSubmit.bind(this)} className='fa fa-search'></i>
+            </div>
+            <input className='searchInput' onChange={this.whenChanged.bind(this, 'searchField')} placeholder='search' value={this.state.searchField}/>
+          </form>
         </div>
         <ul>
           {this.state.inventory.map((item) => {
@@ -79,11 +118,13 @@ class App extends Component {
                 <div className="productInfo">
                   <p className='name'>{item.name}</p>
                   <p className='model'>{'Model: ' + item.model}</p>
-                  <p className='price'>{'Price: ' +'$' + Math.round(item.price)}</p>
+                  <p className='price'>{'Price: ' + '$' + Math.round(item.price)}</p>
                   <p className='description'>{item.description}</p>
                   <a href={item.url}>Item Details</a>
                 </div>
-                <i onClick={this.onDeleteClick.bind(this, item.id)} style={{fontSize: '30px'}} className="fa fa-trash-o"></i>
+                <i onClick={this.onDeleteClick.bind(this, item.id)} style={{
+                  fontSize: '30px'
+                }} className="fa fa-trash-o"></i>
               </li>
             )
           })}

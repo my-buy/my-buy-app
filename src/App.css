@@ -29,6 +29,47 @@ body {
 .App-intro {
   font-size: large;
 }
+
+.search {
+  background-color: #053C63;
+  margin: 0 55px;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+}
+
+form.searchForm {
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 10px 0;
+}
+
+.iconWrapper {
+  align-self: center;
+  position: relative;
+  left: 67.5%;
+  top: -10px;
+}
+
+i.fa-search {
+  color: #0f5FB3;
+  height: 20px;
+  border-left: 1px solid darkgrey;
+  padding: 0 8px;
+  position: absolute;
+  left: 75%;
+}
+
+i.fa-search:hover {
+  color: #0f5fb3;
+}
+
+.searchInput {
+  width: 70%;
+  border-radius: 3px;
+}
+
 ul {
   background-color: white;
   margin: 0 55px;
@@ -56,12 +97,16 @@ li a:hover {
   text-decoration: none;
 }
 .productImage {
-  width: 200px;
+  max-width: 200px;
 }
 .productImage img {
   margin: 0 auto;
   max-height: 200px;
   max-width: 150px;
+}
+
+.productInfo {
+  margin: 0 20px;
 }
 
 .name {
@@ -129,7 +174,19 @@ button {
 @media (min-width: 1024px) {
   li {
     margin-right: 0;
-    width: 47%;
+    width: 46%;
+  }
+  .productInfo {
+    margin: 0 10px;
+  }
+  li:nth-child(odd) {
+    border-right: 1px solid darkgrey;
+    padding-right: 10px;
+  }
+  li:nth-child(even) {
+    margin-right: 25px;
+    margin-left: 0;
+    padding-left: 10px;
   }
   ul {
     display: flex;
