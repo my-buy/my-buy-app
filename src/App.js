@@ -120,7 +120,9 @@ class App extends Component {
                   <p className='model'>{'Model: ' + item.model}</p>
                   <p className='price'>{'Price: ' + '$' + Math.round(item.price)}</p>
                   <p className='description'>{item.description}</p>
-                  <a href={item.url}>Item Details</a>
+                  <div className='itemDetails'>
+                    <a href={item.url}>Item Details</a>
+                  </div>
                 </div>
                 <i onClick={this.onDeleteClick.bind(this, item.id)} style={{
                   fontSize: '30px'
@@ -135,7 +137,7 @@ class App extends Component {
           <input onChange={this.whenChanged.bind(this, 'name')} type='text' value={this.state.name} placeholder='Product Name'/>
           <input onChange={this.whenChanged.bind(this, 'model')} type='text' value={this.state.model} placeholder='Model'/>
           <input onChange={this.whenChanged.bind(this, 'price')} type='number' min="10000" value={this.state.price} placeholder='Price'/>
-          <input onChange={this.whenChanged.bind(this, 'image')} type='text' value={this.state.image} placeholder='image url'/>
+          <input onChange={this.whenChanged.bind(this, 'image')} type='text' value={this.state.image} placeholder='Image Url'/>
           <input onChange={this.whenChanged.bind(this, 'description')} type='text' value={this.state.description} placeholder='Product Description'/>
           <input onChange={this.whenChanged.bind(this, 'url')} type='text' value={this.state.url} placeholder='Product Url'/>
           <button>Add Product</button>
