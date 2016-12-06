@@ -91,12 +91,12 @@ class App extends Component {
         <a name='addProduct'></a>
         <h1>Add a Product</h1>
         <form onSubmit={this.onSubmit.bind(this)}>
-          <input onChange={this.whenChanged.bind(this, 'name')} type='text' value={this.state.name} placeholder='product name'/>
-          <input onChange={this.whenChanged.bind(this, 'model')} type='text' value={this.state.model} placeholder='model'/>
-          <input onChange={this.whenChanged.bind(this, 'price')} type='number' min="10000" value={this.state.price} placeholder='price'/>
+          <input onChange={this.whenChanged.bind(this, 'name')} type='text' value={this.state.name} placeholder='Product Name'/>
+          <input onChange={this.whenChanged.bind(this, 'model')} type='text' value={this.state.model} placeholder='Model'/>
+          <input onChange={this.whenChanged.bind(this, 'price')} type='number' min="10000" value={this.state.price} placeholder='Price'/>
           <input onChange={this.whenChanged.bind(this, 'image')} type='text' value={this.state.image} placeholder='image url'/>
-          <input onChange={this.whenChanged.bind(this, 'description')} type='text' value={this.state.description} placeholder='description'/>
-          <input onChange={this.whenChanged.bind(this, 'url')} type='text' value={this.state.url} placeholder='product url'/>
+          <input onChange={this.whenChanged.bind(this, 'description')} type='text' value={this.state.description} placeholder='Product Description'/>
+          <input onChange={this.whenChanged.bind(this, 'url')} type='text' value={this.state.url} placeholder='Product Url'/>
           <button>Add Product</button>
         </form>
       </div>
