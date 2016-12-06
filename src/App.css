@@ -32,42 +32,42 @@ body {
 
 .search {
   background-color: #053C63;
-  margin: 0 55px;
   border-left: 2px solid white;
   border-right: 2px solid white;
+  margin: 0 55px;
 }
 
 form.searchForm {
-  margin: auto 0;
   display: flex;
   justify-content: center;
-  position: relative;
+  margin: auto 0;
   padding: 10px 0;
+  position: relative;
 }
 
 .iconWrapper {
   align-self: center;
-  position: relative;
   left: 67.5%;
+  position: relative;
   top: -10px;
 }
 
 i.fa-search {
-  color: #0f5FB3;
-  height: 20px;
   border-left: 1px solid darkgrey;
+  color: #0F5FB3;
+  height: 20px;
+  left: 75%;
   padding: 0 8px;
   position: absolute;
-  left: 75%;
 }
 
 i.fa-search:hover {
-  color: #0f5fb3;
+  color: #0F5FB3;
 }
 
 .searchInput {
-  width: 70%;
   border-radius: 3px;
+  width: 70%;
 }
 
 ul {
@@ -134,6 +134,7 @@ form {
 input {
   border: 2px solid GREY;
   border-radius: 2px;
+  font-size: 1.5rem;
   margin: 10px 0;
   padding: 10px 10px;
   text-align: center;
@@ -184,8 +185,8 @@ button {
     padding-right: 10px;
   }
   li:nth-child(even) {
-    margin-right: 25px;
     margin-left: 0;
+    margin-right: 25px;
     padding-left: 10px;
   }
   ul {

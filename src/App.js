@@ -96,7 +96,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo}/>
+          <img alt="logo" src={logo}/>
           <h2>My Buy</h2>
           <a href='#addProduct'>Add a Product</a>
         </div>
@@ -113,7 +113,7 @@ class App extends Component {
             return (
               <li className={item.id} key={item.id}>
                 <div className="productImage">
-                  <img role='presentation' src={item.image}/>
+                  <img alt='Product' src={item.image}/>
                 </div>
                 <div className="productInfo">
                   <p className='name'>{item.name}</p>
