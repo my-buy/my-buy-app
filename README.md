@@ -1,3 +1,34 @@
+# My Buy App
+My Buy is a class project created by Logan Hussung and Andrew Lentz for the Iron Yard Front End Development course. The purpose for this assignment was to introduce us to a React application that pulls information from an API. Our goal was to create an inventory management system using Best Buy's API play ground.
+
+## Design
+We began our design process by creating low fidelity mock ups and then used those to create a high fidelity mock up in Adobe XD. We wanted a simple lay out that was easy to navigate allowing the employee to easily find what they are looking for. We achieved this with flex box and its features.
+
+## Technology
+This app was created with React JS. It was our first experience pairing it with ajax requests to get data from another API.
+
+##Creators Social Media
+Logan Hussung
+[Medium](https://medium.com/@hussu072)
+[GitHub](https://github.com/LoganHussung)
+[Linkedin](https://www.linkedin.com/in/logan-hussung)
+
+Andrew Lentz
+[Medium] (https://medium.com/@andrew.s.lentz)
+[GitHub](https://github.com/AndrewSLentz)
+[Linkedin](https://www.linkedin.com/in/andrew-s-lentz-03931799)
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -900,13 +931,13 @@ This feature is experimental and still [has major usage issues](https://github.c
 
 ### Editor Integration
 
-If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates. 
+If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates.
 
 ![VS Code Jest Preview](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
 
 ## Developing Components in Isolation
 
-Usually, in an app, you have a lot of UI components, and each of them has many different states. 
+Usually, in an app, you have a lot of UI components, and each of them has many different states.
 For an example, a simple button component could have following states:
 
 * With a text label.
