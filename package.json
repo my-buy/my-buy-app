@@ -1,6 +1,6 @@
 {
   "name": "my-buy-app",
-  "homepage": "https://my-buy.github.io/my-buy-app"
+  "homepage": "https://my-buy.github.io/my-buy-app",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
