@@ -120,7 +120,7 @@ class App extends Component {
                   <p className='name'>{item.name}</p>
                   <p className='model'>{'Model: ' + item.model}</p>
                   <p className='price'>{'Price: ' + '$' + Math.round(item.price)}</p>
-                  <p className='description' maxlength="200">{item.description}</p>
+                  <p className='description'>{item.description}</p>
                   <div className='itemDetails'>
                     <a href={item.url}>Item Details</a>
                   </div>
@@ -139,7 +139,7 @@ class App extends Component {
           <input onChange={this.whenChanged.bind(this, 'model')} type='text' value={this.state.model} placeholder='Model'/>
           <input onChange={this.whenChanged.bind(this, 'price')} type='number' min="10000" value={this.state.price} placeholder='Price'/>
           <input onChange={this.whenChanged.bind(this, 'image')} type='text' value={this.state.image} placeholder='Image Url'/>
-          <input onChange={this.whenChanged.bind(this, 'description')} type='text' value={this.state.description} placeholder='Product Description'/>
+          <input onChange={this.whenChanged.bind(this, 'description')} type='text' maxLength="100" value={this.state.description} placeholder='Product Description'/>
           <input onChange={this.whenChanged.bind(this, 'url')} type='text' value={this.state.url} placeholder='Product Url'/>
           <button>Add Product</button>
         </form>
