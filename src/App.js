@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import logo from './bestbuy.png'
+import logo from './bestbuy.png';
+import api from './Api';
 
 var axios = require('axios')
 
@@ -16,7 +17,7 @@ class App extends Component {
       description: '',
       url: '',
       searchField: '',
-      lastGET: 'http://localhost:3030/products?&$limit=20&$sort[price]=-1'
+      lastGET: '/products?&$limit=20&$sort[price]=-1'
     };
   }
   componentDidMount() {
@@ -24,15 +25,15 @@ class App extends Component {
   }
   getInitialData() {
     let inventory;
-    axios.get(this.state.lastGET).then((response) => {
+    axios.get(api() + this.state.lastGET).then((response) => {
       inventory = response.data.data
       this.setState({inventory})
     })
   }
   onDeleteClick(id, e) {
     let inventory;
-    axios.delete('http://localhost:3030/products/' + id).then((deleted) => {
-      axios.get(this.state.lastGET).then((response) => {
+    axios.delete(api() + '/products/' + id).then((deleted) => {
+      axios.get(api() + this.state.lastGET).then((response) => {
         inventory = response.data.data
         this.setState({inventory})
       })
@@ -53,7 +54,7 @@ class App extends Component {
         description: this.state.description,
         url: this.state.url
       }
-      axios.post('http://localhost:3030/products', newItem).then((added) => {
+      axios.post(api() + '/products', newItem).then((added) => {
         this.getInitialData();
       })
       this.setState({
@@ -75,12 +76,12 @@ class App extends Component {
     e.preventDefault();
     let searchTerm = this.state.searchField;
     let inventory;
-    axios.get('http://localhost:3030/products?name[$like]=*' + searchTerm + '*&$sort[price]=-1').then((response) => {
+    axios.get(api() + '/products?name[$like]=*' + searchTerm + '*&$sort[price]=-1').then((response) => {
       if (response.data.data.length !== 0) {
         inventory = response.data.data
         this.setState({
           inventory,
-          lastGET: 'http://localhost:3030/products?name[$like]=*' + searchTerm + '*&$limit=20&$sort[price]=-1'
+          lastGET: '/products?name[$like]=*' + searchTerm + '*&$limit=20&$sort[price]=-1'
         })
       } else {
         alert('product not found');
