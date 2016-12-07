@@ -120,7 +120,7 @@ class App extends Component {
                   <p className='name'>{item.name}</p>
                   <p className='model'>{'Model: ' + item.model}</p>
                   <p className='price'>{'Price: ' + '$' + Math.round(item.price)}</p>
-                  <p className='description'>{item.description}</p>
+                  <p className='description' maxlength="200">{item.description}</p>
                   <div className='itemDetails'>
                     <a href={item.url}>Item Details</a>
                   </div>
